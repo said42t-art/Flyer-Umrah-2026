@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt - Affiche Umrah B2B</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --panel: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --success: #238636;
+            --success-hover: #2ea043;
+            --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .btn-copy {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--success-hover);
+        }
+
+        .btn-copy:active {
+            transform: scale(0.98);
+        }
+
+        .prompt-box {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text);
+            user-select: text;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: var(--font-sans);
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.3s;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🕌 Prompt : Affiche Umrah B2B</h1>
+            <button class="btn-copy" id="copyBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copier le prompt
+            </button>
+        </div>
+
+        <!-- Le contenu à copier -->
+        <div class="prompt-box" id="promptContent">Génère une affiche publicitaire haut de gamme pour l'agence de voyage "Meeqat Manasik B2B". 
+Inspire-toi STRICTEMENT du style visuel, de la palette de couleurs (Vert émeraude, Blanc, Or, Beige) et de la mise en page moderne de la dernière image fournie (cartes arrondies, femme à droite). 
+
+RÈGLES ABSOLUES POUR LE TEXTE (En Indonésien, sans fautes) :
+Remplace les textes de l'image de référence par les textes EXACTS suivants :
+- En haut (Titre principal) : "MEEQAT MANASIK" en grand, suivi de "B2B UMRAH LAND" et "ARRANGEMENT 11D/10N" en dessous.
+- Au centre (Les 3 cartes de prix) : 
+  - Carte 1 : "PAKET QUAD" / "3.520 SAR" / "Rp 16.896.000/pax"
+  - Carte 2 : "PAKET TRIPLE" / "3.770 SAR" / "Rp 18.096.000/pax"
+  - Carte 3 : "PAKET DOUBLE" / "4.270 SAR" / "Rp 20.496.000/pax"
+- En bas à gauche (Encadré vert, texte blanc) : "INCLUDE:" avec la liste : "Visa Umrah", "Transportasi Bus VIP Full", "Makan 3x Sehari Catering Masakan Indonesia".
+- En bas à droite (Encadré blanc, texte foncé) : "EXCLUDE:" avec la liste : "Tiket Pesawat & Paspor".
+- Tout en bas (Bandeau vert) : "meeqatmanasik.b2b@gmail.com"
+
+VISUEL :
+- Garde la femme indonésienne souriante à droite avec son hijab beige et son badge.
+- L'arrière-plan doit être une vue lumineuse de la Kaaba légèrement floutée.
+- Design 8k, ultra professionnel, propre, avec des ombres douces sur les cartes.</div>
+    </div>
+
+    <div class="toast" id="toast">✓ Prompt copié dans le presse-papiers !</div>
+
+    <script>
+        const copyBtn = document.getElementById('copyBtn');
+        const promptContent = document.getElementById('promptContent');
+        const toast = document.getElementById('toast');
+
+        copyBtn.addEventListener('click', () => {
+            // Récupération du texte brut
+            const textToCopy = promptContent.innerText;
+
+            // Copie dans le presse-papiers
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Afficher la notification (Toast)
+                toast.classList.add('show');
+                
+                // Changer le texte du bouton temporairement
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '✓ Copié !';
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    copyBtn.innerHTML = originalText;
+                }, 2500);
+            }).catch(err => {
+                alert("Erreur lors de la copie : " + err);
+            });
+        });
+    </script>
+</body>
+</html>
